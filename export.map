@@ -1,0 +1,25 @@
+# Symbols the Android Vulkan loader looks up in a layer library.
+#
+# layers_extensions.cpp resolves vkEnumerateInstanceLayerProperties and
+# vkEnumerateInstanceExtensionProperties with dlsym() (a library without them is
+# rejected), then vkEnumerateDeviceLayerProperties and
+# vkEnumerateDeviceExtensionProperties (optional, but without them the layer
+# stays out of the device chain).  LayerLibrary::GetGPA() resolves
+# vkGetInstanceProcAddr and vkGetDeviceProcAddr, first as
+# <layerName>GetInstanceProcAddr and then under the plain name.
+#
+# Everything else - the trampolines, the helpers and the C++ runtime - stays
+# hidden, which is what keeps the exported surface to these seven names.
+{
+  global:
+    vkEnumerateInstanceLayerProperties;
+    vkEnumerateInstanceExtensionProperties;
+    vkEnumerateDeviceLayerProperties;
+    vkEnumerateDeviceExtensionProperties;
+    vkGetInstanceProcAddr;
+    vkGetDeviceProcAddr;
+    vkNegotiateLoaderLayerInterfaceVersion;
+
+  local:
+    *;
+};

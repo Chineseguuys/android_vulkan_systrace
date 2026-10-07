@@ -1,0 +1,21 @@
+# Build trees, one per ABI.
+build/
+
+# Written by CMake for clangd and editors; scripts/build.sh links the one of the
+# first ABI into the source directory.
+compile_commands.json
+
+# Index clangd builds for the file above.
+.cache/
+
+# Captured traces: scripts/capture.sh writes both forms.
+*.pftrace
+*.atrace.txt
+*.perfetto-trace
+
+# Python bytecode from running the generator.
+__pycache__/
+*.pyc
+
+# Cursor local files.
+.cursor/
